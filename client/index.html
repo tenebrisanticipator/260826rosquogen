@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <!-- Standard favicon -->
+  <link rel="icon" type="image/png" href="/assets/roshni-quotation/roshni-solar-official-logo.png">
+  <!-- Optional icon for Apple iOS home screens -->
+  <link rel="apple-touch-icon" href="/assets/roshni-quotation/roshni-solar-official-logo.png">
+  <title>Roshni Solar Quotation Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+    (function () {
+      const endpoint = "%VITE_ANALYTICS_ENDPOINT%";
+      const websiteId = "%VITE_ANALYTICS_WEBSITE_ID%";
+      if (endpoint && !endpoint.startsWith("%VITE_")) {
+        const script = document.createElement("script");
+        script.defer = true;
+        script.src = endpoint + "/umami";
+        script.setAttribute("data-website-id", websiteId);
+        document.body.appendChild(script);
+      }
+    })();
+  </script>
+</body>
+
+</html>

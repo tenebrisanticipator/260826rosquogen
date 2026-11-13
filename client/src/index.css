@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+@theme inline {
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px); --radius-md: calc(var(--radius) - 2px); --radius-lg: var(--radius); --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground); --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground); --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-destructive: var(--destructive); --color-destructive-foreground: var(--destructive-foreground); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring);
+}
+:root {
+  --radius: .75rem;
+  --background: #F6FBFB;
+  --foreground: #171D26;
+  --card: #FFFFFF;
+  --card-foreground: #171D26;
+  --popover: #FFFFFF;
+  --popover-foreground: #171D26;
+  --primary: #00619A;
+  --primary-foreground: #F2FAFE;
+  --secondary: #F0F6F9;
+  --secondary-foreground: #2F3C46;
+  --muted: #EEF3F5;
+  --muted-foreground: #5A6C79;
+  --accent: #EEF3F5;
+  --accent-foreground: #141B24;
+  --destructive: #DF0913;
+  --destructive-foreground: #F8F8F8;
+  --border: #D6E0E4;
+  --input: #D6E0E4;
+  --ring: #0082C7;
+}
+@layer base { * { @apply border-border outline-ring/50; } body { @apply bg-background font-sans text-foreground antialiased; } button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [type="button"]:not(:disabled), [type="submit"]:not(:disabled), a[href], select:not(:disabled) { @apply cursor-pointer; } }
+@media print { body { background: white; } aside, header, button, .no-print { display: none !important; } main { padding: 0 !important; } .quotation-preview { box-shadow: none !important; max-width: none !important; } }
+@media (prefers-reduced-motion: no-preference) { button, a { transition: transform 160ms cubic-bezier(.23,1,.32,1), background-color 160ms ease, color 160ms ease, box-shadow 160ms ease; } button:active { transform: scale(.97); } }
+
+.quote-page {
+  --background: rgb(255, 255, 255);
+  --foreground: rgb(15, 23, 42);
+  --card: rgb(255, 255, 255);
+  --card-foreground: rgb(15, 23, 42);
+  --popover: rgb(255, 255, 255);
+  --popover-foreground: rgb(15, 23, 42);
+  --primary: rgb(2, 132, 199);
+  --primary-foreground: rgb(255, 255, 255);
+  --secondary: rgb(241, 245, 249);
+  --secondary-foreground: rgb(15, 23, 42);
+  --muted: rgb(241, 245, 249);
+  --muted-foreground: rgb(100, 116, 139);
+  --accent: rgb(241, 245, 249);
+  --accent-foreground: rgb(15, 23, 42);
+  --destructive: rgb(239, 68, 68);
+  --destructive-foreground: rgb(255, 255, 255);
+  --border: rgb(226, 232, 240);
+  --input: rgb(226, 232, 240);
+  --ring: rgb(2, 132, 199);
+
+  width: 794px;
+  height: 1123px;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  margin-left: auto;
+  margin-right: auto;
+}
+.quote-table { table-layout: fixed; }
+.quote-table tr { break-inside: avoid; page-break-inside: avoid; }
+.quote-footer { break-inside: avoid; page-break-inside: avoid; }
+.doc-swoosh { position: relative; height: 60px; overflow: hidden; background: linear-gradient(168deg, transparent 0 26%, #ffd31a 27% 35%, #55a84f 36% 40%, transparent 41%), linear-gradient(90deg, #cfe7f6, #f6fbff 72%); }
+.doc-official-logo { position: absolute; left: 1.2rem; top: 4px; height: 52px; width: auto; max-width: 240px; object-fit: contain; object-position: left center; }
+.doc-brand-wordmark { position: absolute; right: 1.6rem; top: .58rem; color: #1667ad; font-family: var(--font-display); font-size: 1.15rem; font-weight: 900; letter-spacing: .02em; text-shadow: 0 1px 0 rgba(255,255,255,.7); }
+.doc-brand { position: absolute; right: 2rem; top: 8px; font-family: var(--font-display); font-size: 2.1rem; font-weight: 900; letter-spacing: -.05em; color: #ee2b31; text-shadow: 0 1px 0 rgba(255,255,255,.55); }
+.doc-logo { position: absolute; left: 1.15rem; top: .4rem; display: block; height: 24px; width: 58px; }
+.doc-sun { position: absolute; right: 1px; top: 0; height: 18px; width: 18px; border-radius: 999px; background: #f9bd22; box-shadow: 0 0 0 3px rgba(249,189,34,.16); }
+.doc-roof { position: absolute; bottom: 2px; left: 5px; height: 13px; width: 36px; transform: skewX(-32deg); background: repeating-linear-gradient(90deg, #147abb 0 5px, #60b7e3 5px 8px); border-radius: 2px 3px 1px 1px; }
+.doc-home { position: absolute; bottom: 0; left: 18px; height: 7px; width: 10px; background: #147abb; border-radius: 1px; }
+@page { size: A4; margin: 0; }
+@media print { .quote-document-grid { display: block !important; } .quote-page { width: 210mm !important; height: 297mm !important; min-height: 297mm !important; margin: 0 !important; box-shadow: none !important; break-after: page; page-break-after: always; } .quote-page:last-child { break-after: auto; page-break-after: auto; } .quote-page .quote-table { break-inside: auto; page-break-inside: auto; } }
+.quote-page main { font-size: 13.5px; line-height: 1.4; }
+.quote-page main p, .quote-page main li { font-size: 13px !important; line-height: 1.4 !important; }
+.quote-page main h3 { font-size: 20px !important; line-height: 1.1 !important; letter-spacing: -.02em; }
+.quote-page .quote-table td { padding: 3px 5px !important; font-size: 10px !important; line-height: 1.25 !important; }
+.quote-page .quote-table td strong { font-size: 10.5px; }
+@media print { .quote-page main { font-size: 11pt; } .quote-page main p, .quote-page main li { font-size: 11pt !important; } .quote-page main h3 { font-size: 22pt !important; } .quote-page .quote-table td { font-size: 10.5pt !important; line-height: 1.25 !important; } }
+
+.quote-document-grid { display: flex; flex-direction: column; gap: 20px; align-items: center; width: max-content; min-width: 100%; }
+#quotation-export-root { overflow-x: auto; max-width: 100%; }

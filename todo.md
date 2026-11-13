@@ -1,0 +1,72 @@
+# Project TODO
+
+- [x] Extract reusable logo, header, background, diagram, footer, and promotional image assets from the supplied Roshni Solar DOCX into the approved external asset location.
+- [x] Create document-accurate fixed page template definitions for the branded Roshni Solar quotation, including its introduction, technical specification, commercial proposal, and terms/payback layouts.
+- [x] Add relational database tables, indexes, and migrations for quotations, configurable panel types, activity logs, and quotation metadata.
+- [x] Add protected server procedures for quotation creation, retrieval, search, editing, deletion, and status management.
+- [x] Enforce server-side Admin and User permissions for quotation records, user administration, activity logging, and protected application features.
+- [x] Build the responsive Roshni Solar dashboard shell with branded navigation, accessible mobile menu behavior, and role-aware navigation items.
+- [x] Build dashboard summary cards and recent quotations view using persisted quotation data.
+- [x] Build the validated quotation creation and editing form with customer, solar system, inverter, and pricing sections.
+- [x] Implement Zod validation for mandatory values, valid Indian phone numbers, positive panel wattage, positive panel count, panel type selection, inverter company, and positive plant cost.
+- [x] Implement immediate plant-size calculation using Panel Watt × Number of Panels ÷ 1000 and persist only the calculated kW value.
+- [x] Implement unique sequential quotation numbers in the strict RS-YYYY-NNNNN format and set a current quotation date by default.
+- [x] Add a live responsive quotation summary panel with Indian currency and plant-size formatting.
+- [x] Build the quotation management page with debounced search, filters, sort controls, pagination, responsive table/card presentation, and row actions.
+- [x] Build quotation detail view with customer and system information, quotation metadata, document preview state, and all requested actions.
+- [x] Build Admin-only user management and activity-log interfaces with enable, disable, delete, and role-change actions.
+- [x] Implement Indian currency formatting using ₹ and lakh/crore groupings consistently in all application surfaces.
+- [x] Implement Indian mobile-number normalization and a safe WhatsApp chat-link action for quotations.
+- [x] Implement branded four-page quotation PDF-ready composition that preserves DOCX visual assets, yellow-highlighted cells, graphics, tables, headers, and footers while rendering dynamic data.
+- [x] Implement quotation PDF generate, regenerate, download, and preview actions without creating duplicate document records.
+- [x] Add graceful loading, empty, confirmation, success, and error states for all core workflows.
+- [x] Add Vitest coverage for calculation, quotation-number generation, currency formatting, Indian phone normalization, and server authorization rules.
+- [x] Verify desktop and mobile layouts, type safety, tests, and build output; resolve any detected issues.
+- [x] Save a final project checkpoint after every completed task is marked accurately.
+- [x] Fix the invalid paragraph-to-div nesting warning on the quotation creation page.
+- [x] Extract and catalogue all content and reusable images from the reattached Roshni Solar DOCX for the complete printable quotation.
+- [x] Expand the printable quotation to include the full source document content, tables, terms, imagery, header elements, and page-specific branding.
+- [x] Add a dedicated unauthenticated login screen and redirect authenticated users into a role-aware workspace.
+- [x] Restrict all Admin and User Management navigation, routes, and data procedures so only administrator accounts can view or operate them.
+- [x] Make the sales-user workspace show only that user’s stored quotations, while administrator views retain creator attribution and access to all quotations.
+- [x] Add explicit search by quotation creator on the administrator quotation list and ensure pagination is present on all multi-record management views.
+- [x] Add test coverage for role-isolated routing and creator-aware quotation access.
+- [x] Correct printable quotation A4 page flow so technical and commercial tables continue on the same page when space is available.
+- [x] Increase and rebalance printable quotation typography, spacing, and page content density to match the supplied PDF reference.
+- [x] Repair the login entry and authenticated workspace redirect flow.
+- [x] Repair administrator user-management create, edit, enable/disable, and delete workflows with clear success and error feedback.
+- [x] Add verification coverage for printable table continuity and account-management actions.
+- [x] Add the PDF reference’s missing product-components page and warranty/protection-components page using the supplied visual assets.
+- [x] Verify the settled printable quotation against the PDF reference, including page density, continuous commercial table placement, and all reference sheets.
+- [x] Verify unauthenticated login, OAuth callback, and workspace redirect behavior end to end.
+- [x] Define the role-specific journey: login to user home, quotation creation and history for users, and a distinct administrator dashboard for admins.
+- [x] Ensure normal users cannot see or reach admin dashboard, user management, activity, or template settings, while admins can access all authorized areas.
+- [x] Repair the login route so unauthenticated visitors see the sign-in page rather than dashboard content and authenticated users redirect to their correct home.
+- [x] Update the application navigation to provide a visible logout action and role-appropriate home destination.
+- [x] Add the supplied official Roshni Solar logo to the printable quotation header.
+- [x] Increase printable quotation font sizes, visual hierarchy, and content density so the document is comfortably readable and uses A4 pages effectively.
+- [x] Add a persistent "Made by MIDH Infotech" website watermark outside all printable quotation pages.
+- [x] Add tests for role-specific route gating and user-only quotation scope.
+- [x] Add success-path coverage for administrator account creation and user update/delete actions.
+- [x] Verify the final printable quotation’s A4 page density, readable hierarchy, and page flow against the supplied PDF reference.
+- [x] Add business-flow tests proving a normal user is scoped to their own quotation data and cannot use administrator-only procedures.
+- [x] Display a Roshni Solar text brand in the printable header alongside the official logo.
+- [x] Enrich the first printable quotation page with clear system benefits, project scope, and proposal highlights while preserving readable A4 flow.
+- [x] Add secure ID/password authentication with exact password verification through one-way password hashes rather than plaintext storage.
+- [x] Allow administrators to set and reset sales-user credentials through the management interface without exposing stored passwords.
+- [x] Add tests for credential verification, credential-based login sessions, and administrator credential management permissions.
+- [x] Diagnose and fix the reported credential-login failure for correct login ID and password combinations.
+- [x] Create a verified administrator account and a verified sales-user account with secure hashed temporary passwords.
+- [x] Verify that the administrator credentials route to the admin dashboard and sales-user credentials route to the personal quotation workspace.
+- [x] Create a self-contained database initialization script for a new client database without including live application data or passwords.
+- [x] Write a plain-text deployment and setup guide covering environment variables, database migration, asset storage, Vercel deployment, and conventional Node-server deployment.
+- [x] Add non-destructive Vercel deployment configuration compatible with the existing Express and Vite application.
+- [x] Organize handover files and remove only obsolete generated or inspection artifacts while preserving source code, migrations, tests, documentation, and deployable assets.
+- [x] Validate the final handover with the test suite, production build, and SQL script inspection.
+- [x] Add an administrator quotation-management dashboard view with summary indicators and direct management actions.
+- [x] Add administrator filters and sort controls for quotation status, creator, date, plant size, amount, and search text.
+- [x] Add client-downloadable PDF export for individual generated quotations while retaining printable layout fidelity.
+- [x] Add automated coverage and visual verification for administrator management controls and quotation PDF export.
+- [x] Add automated coverage that selected administrator worklist status, creator, date, plant-size, search, and sort inputs map to the quotation-list query.
+- [x] Add automated coverage for the quotation PDF export trigger and generated-status update path.
+- [x] Perform authenticated visual verification of the administrator worklist and quotation export actions using a working test account.

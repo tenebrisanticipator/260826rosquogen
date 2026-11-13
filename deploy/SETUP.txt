@@ -1,0 +1,119 @@
+ROSHNI SOLAR QUOTATION GENERATOR
+PORTABLE DEPLOYMENT AND CLIENT HANDOVER
+=========================================
+
+This handover supports a conventional Node.js 22+ server and Vercel. The core
+application is React + Vite on the frontend and Express + tRPC + MySQL on the
+backend. It includes ID/password login with one-way scrypt password hashes.
+
+IMPORTANT SECURITY NOTES
+------------------------
+1. Do not put real passwords into script.db, source files, Git, or Vercel build logs.
+2. Set a new JWT_SECRET for each production environment. Use 32+ random characters.
+3. Use HTTPS in production. Session cookies are HTTP-only and secure on HTTPS.
+4. The default temporary credentials supplied during development should be changed
+   or removed after migration.
+
+1. PREPARE THE SOURCE FOLDER
+----------------------------
+Copy the project source and the handover image bundle. Do not copy node_modules,
+dist, .manus-logs, coverage, or .env files.
+
+For an independent deployment, copy the image bundle from the handover package to:
+  client/public/assets/roshni-quotation/
+
+Then set this build-time variable before running pnpm build:
+  VITE_QUOTATION_ASSET_BASE=/assets/roshni-quotation
+
+This makes the branded quotation PDF use your local, deployable image assets rather
+than Manus-managed image URLs.
+
+2. CREATE THE MYSQL DATABASE
+----------------------------
+Create a MySQL 8+ database by running:
+  mysql -u root -p < deploy/database/script.db
+
+Or import it with phpMyAdmin/MySQL Workbench. The script creates structure only;
+it intentionally imports no users, quotations, activity records, or passwords.
+
+3. CONFIGURE ENVIRONMENT VARIABLES
+----------------------------------
+Copy the variables listed in deploy/environment-variables.txt into your host secret manager or a local .env file, then replace all values.
+At a minimum configure:
+  DATABASE_URL
+  JWT_SECRET
+  NODE_ENV=production
+  VITE_QUOTATION_ASSET_BASE=/assets/roshni-quotation
+
+DATABASE_URL format:
+  mysql://USER:PASSWORD@HOST:3306/roshni_solar_quotation
+
+4. INSTALL AND BUILD
+--------------------
+Install Node.js 22+ and pnpm 10+.
+
+  corepack enable
+  pnpm install --frozen-lockfile
+  pnpm check
+  pnpm test
+  pnpm build
+
+5. CREATE THE FIRST ADMINISTRATOR
+---------------------------------
+After the database is imported, use the supplied bootstrap script. This creates a
+secure scrypt hash and never writes the plaintext password into the database.
+
+  DATABASE_URL='mysql://...' \
+  BOOTSTRAP_EMAIL='admin@yourcompany.com' \
+  BOOTSTRAP_PASSWORD='choose-a-strong-password' \
+  ACCOUNT_ROLE='admin' \
+  node scripts/create-credential-user.mjs
+
+Log in through /login. Administrators land on /admin/dashboard. Administrators can
+then create sales users and reset their passwords through Users.
+
+6. CONVENTIONAL NODE SERVER DEPLOYMENT
+--------------------------------------
+After pnpm build:
+  NODE_ENV=production PORT=3000 pnpm start
+
+The Express server serves dist/public and the /api/trpc API from one process.
+Put it behind Nginx, Caddy, PM2, Render, Railway, or another Node-compatible host.
+Keep the same environment variables in the host's secret manager.
+
+7. VERCEL DEPLOYMENT
+--------------------
+This project contains vercel.json and api/index.ts. Before importing the repository
+to Vercel, ensure the portable image bundle is copied under:
+  client/public/assets/roshni-quotation/
+
+Set the same environment variables in Vercel Project Settings. Then deploy with:
+  vercel --prod
+
+or connect the repository in the Vercel dashboard. The configured build command is
+pnpm build. The Express app runs through the Vercel function adapter and serves the
+built frontend from dist/public.
+
+Vercel caveat: requests are serverless and filesystem writes are ephemeral. The
+current Manus storage proxy uses Manus services; replace it with S3, Cloudflare R2,
+Vercel Blob, or another object store before enabling user file uploads outside Manus.
+The ID/password login, quotation data, and database-backed workflows do not depend
+on the Manus OAuth service.
+
+8. OPTIONAL ORGANISATION SIGN-IN
+--------------------------------
+The "Sign in with organisation account" button is retained for the current Manus
+environment. It requires VITE_APP_ID, OAUTH_SERVER_URL, and OWNER_OPEN_ID. For a
+fully independent client deployment, use the ID/password login and leave those
+values unset, or remove the optional button from LoginPage.tsx.
+
+9. POST-DEPLOYMENT CHECKLIST
+----------------------------
+[ ] Confirm /login opens.
+[ ] Test first administrator login.
+[ ] Create a sales user and test their login.
+[ ] Confirm sales users cannot open /admin/dashboard.
+[ ] Create a quotation and print/download the PDF layout.
+[ ] Confirm quotation reference-sheet images load from /assets/roshni-quotation.
+[ ] Change all temporary passwords.
+[ ] Enable automated database backups at the database provider.
