@@ -18,7 +18,7 @@ export const appRouter = router({
     me: publicProcedure.query(opts => opts.ctx.user ?? null),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
-      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
+      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 } as any);
       return { success: true } as const;
     }),
     credentialLogin: publicProcedure.input(z.object({ loginId: z.string().trim().email().max(320), password: z.string().min(8).max(200) })).mutation(async ({ ctx, input }) => {
@@ -48,7 +48,7 @@ export const appRouter = router({
         });
       }
       const sessionToken = await sdk.createSessionToken(user.openId, { name: user.name || user.email || "Roshni user", expiresInMs: ONE_YEAR_MS });
-      ctx.res.cookie(COOKIE_NAME, sessionToken, { ...getSessionCookieOptions(ctx.req), maxAge: ONE_YEAR_MS });
+      ctx.res.cookie(COOKIE_NAME, sessionToken, { ...getSessionCookieOptions(ctx.req), maxAge: ONE_YEAR_MS } as any);
       try {
         await db.update(users).set({ lastSignedIn: new Date(), loginMethod: "credentials" }).where(eq(users.id, user.id));
       } catch (err) {

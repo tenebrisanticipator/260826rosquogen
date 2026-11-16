@@ -228,9 +228,9 @@ async function writeActivityLog(input) {
 // server/_core/cookies.ts
 function isSecureRequest(req) {
   if (req.protocol === "https") return true;
-  const forwardedProto = req.headers["x-forwarded-proto"];
+  const forwardedProto = req.headers?.["x-forwarded-proto"];
   if (!forwardedProto) return false;
-  const protoList = Array.isArray(forwardedProto) ? forwardedProto : forwardedProto.split(",");
+  const protoList = Array.isArray(forwardedProto) ? forwardedProto : String(forwardedProto).split(",");
   return protoList.some((proto) => proto.trim().toLowerCase() === "https");
 }
 function getSessionCookieOptions(req) {
@@ -432,10 +432,12 @@ var SDKServer = class {
     };
   }
   async authenticateRequest(req) {
-    const cookies = this.parseCookies(req.headers.cookie);
+    const headers = req?.headers ?? {};
+    const cookieHeader = typeof headers.cookie === "string" ? headers.cookie : void 0;
+    const cookies = this.parseCookies(cookieHeader);
     let sessionToken = cookies.get(COOKIE_NAME);
     if (!sessionToken) {
-      const authHeader = req.headers.authorization;
+      const authHeader = headers.authorization;
       if (typeof authHeader === "string" && authHeader.startsWith("Bearer ")) {
         sessionToken = authHeader.slice(7);
       }
@@ -505,7 +507,7 @@ var sdk = new SDKServer();
 
 // server/_core/oauth.ts
 function getQueryParam(req, key) {
-  const value = req.query[key];
+  const value = req?.query?.[key];
   return typeof value === "string" ? value : void 0;
 }
 function registerOAuthRoutes(app2) {
@@ -517,7 +519,9 @@ function registerOAuthRoutes(app2) {
       return;
     }
     const { nonce } = decodeOAuthState(state);
-    const expectedNonce = parseCookieHeader2(req.headers.cookie ?? "")[OAUTH_STATE_COOKIE];
+    const headers = req.headers || {};
+    const cookieHeader = typeof headers.cookie === "string" ? headers.cookie : "";
+    const expectedNonce = parseCookieHeader2(cookieHeader)[OAUTH_STATE_COOKIE];
     if (!nonce || nonce !== expectedNonce) {
       res.status(403).json({ error: "invalid oauth state" });
       return;

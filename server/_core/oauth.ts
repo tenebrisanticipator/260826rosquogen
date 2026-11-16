@@ -5,8 +5,8 @@ import * as db from "../db.js";
 import { getSessionCookieOptions } from "./cookies.js";
 import { sdk } from "./sdk.js";
 
-function getQueryParam(req: Request, key: string): string | undefined {
-  const value = req.query[key];
+function getQueryParam(req: any, key: string): string | undefined {
+  const value = req?.query?.[key];
   return typeof value === "string" ? value : undefined;
 }
 
@@ -24,7 +24,9 @@ export function registerOAuthRoutes(app: Express) {
     // startLogin set in the browser that began this login. An attacker can
     // forge `state`, but cannot plant this cookie in the victim's browser.
     const { nonce } = decodeOAuthState(state);
-    const expectedNonce = parseCookieHeader(req.headers.cookie ?? "")[OAUTH_STATE_COOKIE];
+    const headers = (req as any).headers || {};
+    const cookieHeader = typeof headers.cookie === "string" ? headers.cookie : "";
+    const expectedNonce = parseCookieHeader(cookieHeader)[OAUTH_STATE_COOKIE];
     if (!nonce || nonce !== expectedNonce) {
       res.status(403).json({ error: "invalid oauth state" });
       return;
