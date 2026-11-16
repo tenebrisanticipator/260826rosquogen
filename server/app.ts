@@ -1,10 +1,10 @@
 import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./_core/oauth";
-import { registerStorageProxy } from "./_core/storageProxy";
-import { serveStatic } from "./_core/static";
-import { createContext } from "./_core/context";
-import { appRouter } from "./routers";
+import { registerOAuthRoutes } from "./_core/oauth.js";
+import { registerStorageProxy } from "./_core/storageProxy.js";
+import { serveStatic } from "./_core/static.js";
+import { createContext } from "./_core/context.js";
+import { appRouter } from "./routers.js";
 
 /** Production Express application used by portable Node and Vercel adapters. */
 export function createProductionApp() {

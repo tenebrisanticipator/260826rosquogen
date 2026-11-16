@@ -1,6 +1,6 @@
 import path from "node:path";
 import type { Request, Response } from "express";
-import { createProductionApp } from "../server/app";
+import { createProductionApp } from "../server/app.js";
 
 process.env.STATIC_DIR ??= path.resolve(process.cwd(), "dist", "public");
 

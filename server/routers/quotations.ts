@@ -1,10 +1,10 @@
 import { and, desc, eq, gte, like, lte, or, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { quotations, users } from "../../drizzle/schema";
-import { calculatePlantSizeKw, normalizeIndianPhone } from "../../shared/quotation";
-import { getDb, getNextQuotationNumber, writeActivityLog } from "../db";
-import { protectedProcedure, router } from "../_core/trpc";
+import { quotations, users } from "../../drizzle/schema.js";
+import { calculatePlantSizeKw, normalizeIndianPhone } from "../../shared/quotation.js";
+import { getDb, getNextQuotationNumber, writeActivityLog } from "../db.js";
+import { protectedProcedure, router } from "../_core/trpc.js";
 
 const quotationInput = z
   .object({

@@ -1,9 +1,9 @@
 import { desc, eq, like } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { activityLogs, InsertUser, quotations, users } from "../drizzle/schema";
-import { quotationNumberFor } from "../shared/quotation";
-import { ENV } from "./_core/env";
+import { activityLogs, InsertUser, quotations, users } from "../drizzle/schema.js";
+import { quotationNumberFor } from "../shared/quotation.js";
+import { ENV } from "./_core/env.js";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 let client: postgres.Sql | null = null;

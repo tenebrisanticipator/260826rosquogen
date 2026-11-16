@@ -1,10 +1,10 @@
 import { desc, eq, gte, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { activityLogs, quotations, users } from "../../drizzle/schema";
-import { getDb, writeActivityLog } from "../db";
-import { adminProcedure, router } from "../_core/trpc";
-import { hashPassword } from "../_core/passwords";
+import { activityLogs, quotations, users } from "../../drizzle/schema.js";
+import { getDb, writeActivityLog } from "../db.js";
+import { adminProcedure, router } from "../_core/trpc.js";
+import { hashPassword } from "../_core/passwords.js";
 
 export const adminRouter = router({
   dashboard: adminProcedure.query(async () => {

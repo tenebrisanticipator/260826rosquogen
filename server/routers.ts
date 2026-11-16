@@ -1,15 +1,15 @@
-import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
+import { COOKIE_NAME, ONE_YEAR_MS } from "../shared/const.js";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
-import { users } from "../drizzle/schema";
-import { getDb } from "./db";
-import { getSessionCookieOptions } from "./_core/cookies";
-import { verifyPassword } from "./_core/passwords";
-import { sdk } from "./_core/sdk";
-import { publicProcedure, router } from "./_core/trpc";
-import { systemRouter } from "./_core/systemRouter";
-import { adminRouter } from "./routers/admin";
-import { quotationRouter } from "./routers/quotations";
+import { users } from "../drizzle/schema.js";
+import { getDb } from "./db.js";
+import { getSessionCookieOptions } from "./_core/cookies.js";
+import { verifyPassword } from "./_core/passwords.js";
+import { sdk } from "./_core/sdk.js";
+import { publicProcedure, router } from "./_core/trpc.js";
+import { systemRouter } from "./_core/systemRouter.js";
+import { adminRouter } from "./routers/admin.js";
+import { quotationRouter } from "./routers/quotations.js";
 
 export const appRouter = router({
   system: systemRouter,
