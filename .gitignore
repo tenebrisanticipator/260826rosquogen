@@ -3,3 +3,6 @@ client/public/__manus__/
 .project-config.json
 node_modules/
 dist/
+.env
+*.env
+*.db

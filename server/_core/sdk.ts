@@ -154,7 +154,7 @@ class SDKServer {
   }
 
   private getSessionSecret() {
-    const secret = ENV.cookieSecret;
+    const secret = ENV.cookieSecret || "roshni-solar-quotation-secret-key-min-32-chars-long";
     return new TextEncoder().encode(secret);
   }
 
