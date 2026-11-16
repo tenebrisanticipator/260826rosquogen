@@ -7,10 +7,7 @@
   "outputDirectory": "dist/public",
   "functions": {
     "api/index.ts": {
-      "includeFiles": [
-        "dist/public/**",
-        "server/**"
-      ]
+      "includeFiles": "{dist/public/**,server/**}"
     }
   },
   "rewrites": [
