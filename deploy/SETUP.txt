@@ -3,8 +3,8 @@ PORTABLE DEPLOYMENT AND CLIENT HANDOVER
 =========================================
 
 This handover supports a conventional Node.js 22+ server and Vercel. The core
-application is React + Vite on the frontend and Express + tRPC + MySQL on the
-backend. It includes ID/password login with one-way scrypt password hashes.
+application is React + Vite on the frontend and Express + tRPC + PostgreSQL on
+the backend. It includes ID/password login with one-way scrypt password hashes.
 
 IMPORTANT SECURITY NOTES
 ------------------------
@@ -28,13 +28,11 @@ Then set this build-time variable before running pnpm build:
 This makes the branded quotation PDF use your local, deployable image assets rather
 than Manus-managed image URLs.
 
-2. CREATE THE MYSQL DATABASE
+2. CREATE THE POSTGRESQL DATABASE
 ----------------------------
-Create a MySQL 8+ database by running:
-  mysql -u root -p < deploy/database/script.db
-
-Or import it with phpMyAdmin/MySQL Workbench. The script creates structure only;
-it intentionally imports no users, quotations, activity records, or passwords.
+Create a PostgreSQL database with your database provider. Apply the schema from
+the project root after configuring DATABASE_URL in the next step:
+  pnpm db:push
 
 3. CONFIGURE ENVIRONMENT VARIABLES
 ----------------------------------
@@ -46,7 +44,7 @@ At a minimum configure:
   VITE_QUOTATION_ASSET_BASE=/assets/roshni-quotation
 
 DATABASE_URL format:
-  mysql://USER:PASSWORD@HOST:3306/roshni_solar_quotation
+  postgres://USER:PASSWORD@HOST:5432/roshni_solar_quotation?sslmode=require
 
 4. INSTALL AND BUILD
 --------------------
@@ -60,10 +58,10 @@ Install Node.js 22+ and pnpm 10+.
 
 5. CREATE THE FIRST ADMINISTRATOR
 ---------------------------------
-After the database is imported, use the supplied bootstrap script. This creates a
+After the database schema is applied, use the supplied bootstrap script. This creates a
 secure scrypt hash and never writes the plaintext password into the database.
 
-  DATABASE_URL='mysql://...' \
+  DATABASE_URL='postgres://...' \
   BOOTSTRAP_EMAIL='admin@yourcompany.com' \
   BOOTSTRAP_PASSWORD='choose-a-strong-password' \
   ACCOUNT_ROLE='admin' \
