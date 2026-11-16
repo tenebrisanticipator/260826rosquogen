@@ -83,7 +83,8 @@ Keep the same environment variables in the host's secret manager.
 
 7. VERCEL DEPLOYMENT
 --------------------
-This project contains vercel.json and api/index.ts. Before importing the repository
+This project contains vercel.json and the Express serverless handler at api/index.ts.
+It targets Vercel's supported Node.js 22 runtime. Before importing the repository
 to Vercel, ensure the portable image bundle is copied under:
   client/public/assets/roshni-quotation/
 

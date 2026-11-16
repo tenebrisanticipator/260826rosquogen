@@ -2,7 +2,7 @@ import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./_core/oauth";
 import { registerStorageProxy } from "./_core/storageProxy";
-import { serveStatic } from "./_core/vite";
+import { serveStatic } from "./_core/static";
 import { createContext } from "./_core/context";
 import { appRouter } from "./routers";
 
