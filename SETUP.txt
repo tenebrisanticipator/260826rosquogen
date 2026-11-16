@@ -92,8 +92,9 @@ Set the same environment variables in Vercel Project Settings. Then deploy with:
   vercel --prod
 
 or connect the repository in the Vercel dashboard. The configured build command is
-pnpm build. The Express app runs through the Vercel function adapter and serves the
-built frontend from dist/public.
+pnpm build and the output directory is dist/public. Vercel serves the Vite frontend
+and its bundled assets as static files, uses the SPA fallback for client-side routes,
+and sends /api requests to the Express function adapter.
 
 Vercel caveat: requests are serverless and filesystem writes are ephemeral. The
 current Manus storage proxy uses Manus services; replace it with S3, Cloudflare R2,
