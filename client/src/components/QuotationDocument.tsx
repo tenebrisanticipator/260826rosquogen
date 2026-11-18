@@ -466,88 +466,94 @@ export default function QuotationDocument({ quotation: q }: { quotation: Quote }
       </Page>
 
       <Page q={q} number={3}>
-        <main className="px-7 pt-6">
-          <h3 className="text-[11px] font-extrabold">Payback Calculation:</h3>
-          <table className="quote-table mt-2 w-full border-collapse">
-            <tbody>
-              <Row label="Generation per year / kW" value="1500* Unit" />
-              <Row
-                label="Generation for complete System"
-                value={`1500 × ${formatPlantSize(
-                  q.plantSizeKw
-                )} ≈ ${annualGeneration.toLocaleString("en-IN")} Unit`}
-              />
-              <Row label="Average Cost per unit" value="Rs. 8.5*" />
-              <Row
-                label="Saving against generation / year"
-                value={`Rs. 8.5 × ${annualGeneration.toLocaleString(
-                  "en-IN"
-                )} Unit = ${formatIndianCurrency(annualSaving)}`}
-              />
-              <Row
-                label="Payback period"
-                value={`${formatIndianCurrency(
-                  effectiveCost
-                )} / ${formatIndianCurrency(annualSaving)} ≈ ${payback.toFixed(
-                  1
-                )} years`}
-              />
-              <Row
-                label="Area required for installation"
-                value={`${area.toLocaleString("en-IN")} Sq. Ft`}
-              />
-            </tbody>
-          </table>
-          <h3 className="mt-4 text-[11px] font-extrabold">Terms and conditions:</h3>
-          <ul className="mt-2 list-disc space-y-1 pl-4 text-[9px] leading-[1.28]">
-            <li>Life of Solar System will be 30 Years*</li>
-            <li>
-              <mark className="bg-yellow-200 font-bold">
-                Performance Warranty of Solar Panel: 90% power output after 10
-                Years and 80% power output after 30 Years
-              </mark>
-            </li>
-            <li>Cleaning of Solar Panels will be in client’s scope.</li>
-            <li>
-              Design of solar plant once approved from client won’t be altered
-              later. If client wants to amend the design, charges for the same
-              will be in client’s scope.
-            </li>
-            <li>
-              Rate are inclusive of GST, freight, DISCOM charges and five-year
-              free service.
-            </li>
-            <li>
-              <mark className="bg-yellow-200 font-bold">
-                Payment Terms: 1st payment 30% of Net Amount, 2nd payment 50%,
-                3rd payment 20%
-              </mark>
-            </li>
-            <li>Offer Validity: One week from date of offer.</li>
-            <li>Maintenance cost in any natural hazard will be extra.</li>
-          </ul>
-          <p className="mt-4 text-[9px]">
-            Hope our offer is inline of your requirement. We will be happy to
-            receive your valuable order.
-          </p>
-          <div className="mt-4 grid grid-cols-[1fr_auto] gap-4 text-[9px]">
-            <div>
-              <p className="font-extrabold">NAME - Roshni enterprise</p>
-              <p>Bank - HDFC bank</p>
-              <p>A/c no - 0251873000081 &nbsp; IFSC - HDFC0009473</p>
-              <p>BRANCH-OMNAGAR, TARSALI, VADODARA.</p>
-              <p>GST NO - 24ALEPP4601L1Z6.</p>
+        <main className="flex flex-1 flex-col justify-between px-7 pt-4">
+          <section>
+            <h3 className="text-[11px] font-extrabold">Payback Calculation:</h3>
+            <table className="quote-table mt-2 w-full border-collapse">
+              <tbody>
+                <Row label="Generation per year / kW" value="1500* Unit" />
+                <Row
+                  label="Generation for complete System"
+                  value={`1500 × ${formatPlantSize(
+                    q.plantSizeKw
+                  )} ≈ ${annualGeneration.toLocaleString("en-IN")} Unit`}
+                />
+                <Row label="Average Cost per unit" value="Rs. 8.5*" />
+                <Row
+                  label="Saving against generation / year"
+                  value={`Rs. 8.5 × ${annualGeneration.toLocaleString(
+                    "en-IN"
+                  )} Unit = ${formatIndianCurrency(annualSaving)}`}
+                />
+                <Row
+                  label="Payback period"
+                  value={`${formatIndianCurrency(
+                    effectiveCost
+                  )} / ${formatIndianCurrency(annualSaving)} ≈ ${payback.toFixed(
+                    1
+                  )} years`}
+                />
+                <Row
+                  label="Area required for installation"
+                  value={`${area.toLocaleString("en-IN")} Sq. Ft`}
+                />
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h3 className="text-[11px] font-extrabold">Terms and conditions:</h3>
+            <ul className="mt-2 list-disc space-y-1 pl-4 text-[9px] leading-[1.28]">
+              <li>Life of Solar System will be 30 Years*</li>
+              <li>
+                <mark className="bg-yellow-200 font-bold">
+                  Performance Warranty of Solar Panel: 90% power output after 10
+                  Years and 80% power output after 30 Years
+                </mark>
+              </li>
+              <li>Cleaning of Solar Panels will be in client’s scope.</li>
+              <li>
+                Design of solar plant once approved from client won’t be altered
+                later. If client wants to amend the design, charges for the same
+                will be in client’s scope.
+              </li>
+              <li>
+                Rate are inclusive of GST, freight, DISCOM charges and five-year
+                free service.
+              </li>
+              <li>
+                <mark className="bg-yellow-200 font-bold">
+                  Payment Terms: 1st payment 30% of Net Amount, 2nd payment 50%,
+                  3rd payment 20%
+                </mark>
+              </li>
+              <li>Offer Validity: One week from date of offer.</li>
+              <li>Maintenance cost in any natural hazard will be extra.</li>
+            </ul>
+          </section>
+          <section>
+            <p className="text-[9px]">
+              Hope our offer is inline of your requirement. We will be happy to
+              receive your valuable order.
+            </p>
+            <div className="mt-4 grid grid-cols-[1fr_auto] gap-4 text-[9px]">
+              <div>
+                <p className="font-extrabold">NAME - Roshni enterprise</p>
+                <p>Bank - HDFC bank</p>
+                <p>A/c no - 0251873000081 &nbsp; IFSC - HDFC0009473</p>
+                <p>BRANCH-OMNAGAR, TARSALI, VADODARA.</p>
+                <p>GST NO - 24ALEPP4601L1Z6.</p>
+              </div>
+              <div className="text-center">
+                <img
+                  src={asset.seal}
+                  crossOrigin="anonymous"
+                  alt="Roshni Enterprise seal and authorisation signature"
+                  className="mx-auto h-14 w-auto object-contain"
+                />
+                <p className="mt-1">For ROSHNI ENTERPRISE</p>
+              </div>
             </div>
-            <div className="text-center">
-              <img
-                src={asset.seal}
-                crossOrigin="anonymous"
-                alt="Roshni Enterprise seal and authorisation signature"
-                className="mx-auto h-14 w-auto object-contain"
-              />
-              <p className="mt-1">For ROSHNI ENTERPRISE</p>
-            </div>
-          </div>
+          </section>
         </main>
       </Page>
 

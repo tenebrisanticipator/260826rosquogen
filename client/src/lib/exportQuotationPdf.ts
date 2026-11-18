@@ -78,7 +78,7 @@ export async function downloadQuotationPdf(root: HTMLElement, quotationNumber: s
 
   const stage = document.createElement("div");
   stage.setAttribute("data-pdf-stage", "true");
-  stage.style.cssText = "position:fixed;left:-12000px;top:0;width:794px;background:#ffffff;z-index:-1;pointer-events:none;";
+  stage.style.cssText = "position:fixed;left:0;top:0;width:794px;background:#ffffff;z-index:-1;pointer-events:none;";
   document.body.appendChild(stage);
 
   const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4", compress: true });
